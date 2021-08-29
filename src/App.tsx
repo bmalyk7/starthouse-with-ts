@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState, useEffect} from 'react';
+import '../src/styles/main.css'
+import {Route, BrowserRouter, Switch, Redirect} from "react-router-dom";
+import PostPage from "./pages/PostsPage";
+import PostIdPage from "./pages/PostIdPage";
+import Navbar from "../src/components/Navbar";
+import {PostContext} from "./context";
 
 function App() {
+  const [show, setShow] = useState(false)
+  const [title, setTitle] = useState('')
+  const provideTitle = (title: string) => {
+    setTitle(title)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PostContext.Provider value={{title, show, setShow}}>
+      <BrowserRouter>
+        <Navbar />
+        <Switch>
+          <Route exact path='/posts'>
+            <PostPage />
+          </Route>
+          <Route exact path='/posts/:id'>
+            <PostIdPage provideTitle={provideTitle} />
+          </Route>
+          <Redirect to={'/posts'}/>
+        </Switch>
+      </BrowserRouter>
+    </PostContext.Provider>
   );
 }
 

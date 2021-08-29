@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.postIdPage {
+    padding: 20px 30px;
+}
+
+.error{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error__msg{
+    text-align: center;
+    color: red;
+    font-size: large;
+}
+
+.postIdPage div{
+    margin-top: 30px;
+}
